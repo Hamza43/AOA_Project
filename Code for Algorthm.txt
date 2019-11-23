@@ -37,7 +37,7 @@ int main()
 	cout << "Enter Both DNA:" << endl;
 	cin >> DNA1 >> DNA2;
 
-	cout << LCS(DNA1, DNA2) << endl;
+	cout <<"Matching DNA Components are : "<< LCS(DNA1, DNA2) << endl;
 
 	system("pause");
 	return 0;
