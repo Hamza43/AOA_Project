@@ -1,0 +1,55 @@
+# include <iostream>  
+#include<bits/stdc++.h>  
+using namespace std;
+
+int max(int a, int b);
+
+int LCS(char* st1, char* st2, int sizestr1, int sizestr2)
+{
+	int L[sizestr1 + 1][sizestr2 + 1];
+	int i, j;
+
+	
+	for (i = 0; i <= sizestr1; i++)
+	{
+		for (j = 0; j <= sizestr2; j++)
+		{
+			if (i == 0 || j == 0)
+				L[i][j] = 0;
+
+			else if (st1[i - 1] == st2[j - 1])
+				L[i][j] = L[i - 1][j - 1] + 1;
+
+			else
+				L[i][j] = max(L[i - 1][j], L[i][j - 1]);
+		}
+	}
+	return L[sizestr1][sizestr2];
+
+}
+int max(int a, int b)
+{
+	if (a > b)
+	{
+		return a;
+	}
+	else
+	{
+		return b;
+	}
+	
+}
+
+int main()
+{
+	char str1[] = "HAMZA";
+	char str2[] = "AHMAD";
+
+	int sizeofstr1 = strlen(str1);
+	int sizeofstr2 = strlen(str2);
+
+	cout << "Length of LCS is "
+		<< LCS(str1, str2, sizeofstr1, sizeofstr2);
+
+	return 0;
+}
