@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string& max(string &DNA1, string &DNA2)
+{
+	return DNA1.size() > DNA2.size() ? DNA1 : DNA2;
+}
+
+string LCS(string DNA1, string DNA2)
+{
+	string lcsStr;
+
+	if (DNA1.empty() || DNA2.empty())
+	{
+		return string();
+	}
+	
+	if (DNA1.at(DNA1.size() - 1) == DNA2.at(DNA2.size() - 1))
+	{
+		lcsStr.push_back(DNA1.at(DNA1.size() - 1));
+		DNA1.pop_back();
+		DNA2.pop_back();
+		return LCS(DNA1, DNA2) += lcsStr;
+	}
+
+	else
+	{
+		return max(LCS(DNA1.substr(0, DNA1.size() - 1), DNA2), LCS(DNA1, DNA2.substr(0, DNA2.size() - 1))) += lcsStr;
+	}
+}
+
+
+int main()
+{
+	string DNA1, DNA2;
+	cout << "Enter Both DNA:" << endl;
+	cin >> DNA1 >> DNA2;
+
+	cout <<"Matching DNA Components are : "<< LCS(DNA1, DNA2) << endl;
+
+	system("pause");
+	return 0;
+}
